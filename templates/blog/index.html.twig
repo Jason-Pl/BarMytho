@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur BarMytho !
+{% endblock %}
+
+{% block body %}
+<section class="row article mt-3 justify-content-center">
+{% for recipe in recipes %}
+        <article class="card py-3 my-3 col-3 mx-3">
+            <h2 class="h4">{{ recipe.title }}</h2>
+            <div class="metadata">Ecrit le {{ recipe.createdAt | date('d/m/Y') }} à {{ recipe.createdAt | date('H:i') }} dans la catégorie {{recipe.category.title}}</div>
+            <div class="content">
+                <img class="card-img-top" src="{{ recipe.image }}"" alt="">
+                <p>{{ recipe.content | raw | length > 50 ? recipe.content|slice(0, 50) ~ '...' : recipe.content }}</p>
+                <a href="{{ path('recipe' , {'id' : recipe.id}) }}" class="btn btn-primary">Lire la suite</a>
+            </div>
+        </article>
+{% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    
+    <h1>Création d'une recette</h1>
+
+    {{ form_start(formRecipe)}}
+
+    {{ form_row(formRecipe.title, {'attr': {'placeholder': "Titre de l'article"}}) }}
+    {{ form_row(formRecipe.category) }}
+    {{ form_row(formRecipe.content, {'attr': {'placeholder': "Votre recette"}}) }}
+    {{ form_row(formRecipe.image, {'attr': {'placeholder': "URL de l'image"}}) }}
+
+    <button type="submit" class="btn btn-success">
+    {% if editMode %}
+    Modifier 
+    {% else %} 
+    Ajouter la recette 
+    {% endif %}
+    </button>
+
+    {{ form_end(formRecipe) }}
+
+{% endblock %}

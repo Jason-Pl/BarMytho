@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <article>
+        <h2>{{ recipe.title }}</h2>
+        <div class="metadata">Ecrit le {{ recipe.createdAt | date('d/m/Y') }} à {{ recipe.createdAt | date('H:i') }} dans la catégorie {{recipe.category.title}}</div>
+        <div class="content">
+            <img src="{{ recipe.image }}" alt="Photo de ma recette">
+            <p>{{ recipe.content | raw }}</p>
+        </div>
+    </article>
+    <section id="commentaires">
+    <h2>{{  recipe.comments | length }} commentaires :</h2>
+            {% for comment in recipe.comments %}
+            <div class="comment">
+                <div class="row">
+                    <div class="col-3">
+                        {{ comment.author }}
+                        <br>
+                        (<small>{{comment.createdAt | date('d/m/Y à H:i') }}</small>)
+                    </div>
+                    <div class="col">
+                        {{ comment.content | raw}}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% if app.user %}
+
+            {{ form_start(commentForm) }}
+
+            
+            {{ form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}, 'label': 'Pseudo'})}}
+            {{ form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}, 'label': 'Commentaire'})}}
+
+            <button type="submit" class="btn btn-success">Envoyer</button>
+            {{ form_end(commentForm) }}
+
+            {% else %}
+                <h2>Veuillez vous connecter pour laisser un commentaire</h2>
+            {% endif %}
+
+        </section>
+{% endblock %}

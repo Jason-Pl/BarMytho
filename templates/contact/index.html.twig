@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+{% block body %}
+
+<h2>Formulaire de contact</h2>
+
+{{ form_start(contactForm) }}
+{{ form_row(contactForm.name, {'attr': {'placeholder': 'Votre nom'}, 'label' : 'Nom'}) }}
+{{ form_row(contactForm.email, {'attr': {'placeholder': 'Votre email'}, 'label' : 'Email'}) }}
+{{ form_row(contactForm.message, {'attr': {'placeholder': 'Votre message'}, 'label' : 'Message'}) }}
+{{ form_end(contactForm) }}
+
+
+{% endblock %}
